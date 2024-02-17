@@ -1,11 +1,14 @@
 import csv
+from rates import Rates
+
+r = Rates()
 
 # Function to calculate income tax based on income details
 def calculate_income_tax(income_details):
     # Your income tax calculation logic here
     total_income = sum(income_details.values())
-    # Sample calculation logic (simplified for demonstration)
-    tax_rate = 0.20  # Assuming a flat tax rate for demonstration
+    # Logic in rates.py
+    tax_rate = r.income_tax_rate(total_income)
     income_tax = total_income * tax_rate
     return income_tax
 
@@ -21,8 +24,9 @@ def calculate_pension_relief(pension_contribution):
 def calculate_cgt(disposal_proceeds, acquisition_cost):
     # Your CGT calculation logic here
     # Sample calculation logic (simplified for demonstration)
-    cgt_rate = 0.10  # Assuming a flat CGT rate for demonstration
-    cgt = (disposal_proceeds - acquisition_cost) * cgt_rate
+    cap_gains = disposal_proceeds-acquisition_cost
+    cgt_rate = r.cap_gains_tax_rate(cap_gains)
+    cgt = cap_gains * cgt_rate
     return cgt
 
 # Function to generate tax return
